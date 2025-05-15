@@ -1,0 +1,58 @@
+import unittest
+
+from htmlnode import HtmlNode
+
+class TestHtmlNode(unittest.TestCase):
+    def test_prop(self):
+        node = HtmlNode(props={"href": "https://www.google.com","target": "_blank",})
+        result = "href=\"https://www.google.com\" target=\"_blank\""
+        self.assertEqual(result,node.props_to_html())
+
+
+    def test_prop2(self):
+        node = HtmlNode(props={"href": "https://google.com","target": "_blank",})
+        result = "href=\"https://google.com\" target=\"_blank\""
+        self.assertEqual(result,node.props_to_html())    
+        
+    def test_repr(self):
+        props={"href": "https://google.com","target": "_blank",}
+        node = HtmlNode(props=props)
+        result = f"HtmlNode(None, None, None, {props.items()})"
+        self.assertEqual(result,node.__repr__())    
+
+    def test_values(self):
+        node = HTMLNode(
+            "div",
+            "I wish I could read",
+        )
+        self.assertEqual(
+            node.tag,
+            "div",
+        )
+        self.assertEqual(
+            node.value,
+            "I wish I could read",
+        )
+        self.assertEqual(
+            node.children,
+            None,
+        )
+        self.assertEqual(
+            node.props,
+            None,
+        )
+
+    def test_repr_2(self):
+        node = HTMLNode(
+            "p",
+            "What a strange world",
+            None,
+            {"class": "primary"},
+        )
+        self.assertEqual(
+            node.__repr__(),
+            "HTMLNode(p, What a strange world, children: None, {'class': 'primary'})",
+        )
+
+if __name__ == "__main__":
+    unittest.main() 
