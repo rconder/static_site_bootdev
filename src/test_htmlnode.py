@@ -5,12 +5,12 @@ from htmlnode import HtmlNode, LeafNode
 class TestHtmlNode(unittest.TestCase):
     def test_prop(self):
         node = HtmlNode(props={"href": "https://www.google.com","target": "_blank",})
-        result = "href=\"https://www.google.com\" target=\"_blank\""
+        result = " href=\"https://www.google.com\" target=\"_blank\""
         self.assertEqual(result,node.props_to_html())
 
     def test_prop2(self):
         node = HtmlNode(props={"href": "https://google.com","target": "_blank",})
-        result = "href=\"https://google.com\" target=\"_blank\""
+        result = " href=\"https://google.com\" target=\"_blank\""
         self.assertEqual(result,node.props_to_html())
 
     def test_repr(self):
