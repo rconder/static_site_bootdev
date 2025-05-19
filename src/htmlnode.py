@@ -9,6 +9,7 @@ class HtmlNode():
 
     def to_html(self):
         raise Exception("Not Implemented")
+        return ""
 
     def props_to_html(self):
         result = ""
@@ -17,10 +18,15 @@ class HtmlNode():
         return result[:-1]
 
 class LeafNode(HtmlNode):
-    def __init__(self,tag = None, value = None ):
-        super().__init__(tag, value, None, None)
-    
+    def __init__(self,tag = None, value = None , props = None ):
+        super().__init__(tag, value, None, props)
+
     def to_html(self):
         if not self.value:
-            raise Exception("All leaf nodes must have a value")
-        return ""
+            raise ValueError("All leaf nodes must have a value")
+        if not self.tag:
+            return self.value
+        elif self.props:
+            return f"<{self.tag} {self.props_to_html()}>{self.value}</{self.tag}>"
+        else:
+            return f"<{self.tag}>{self.value}</{self.tag}>"
